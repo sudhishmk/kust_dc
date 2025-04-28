@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: test
+
+resources:
+- deploymentconfig.yaml
+
+images:
+- name: registry.access.redhat.com/ubi8/openjdk-17
+  newName: registry.access.redhat.com/ubi8/openjdk-17
+  newTag: "1.12"
