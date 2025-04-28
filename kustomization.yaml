@@ -6,6 +6,6 @@ resources:
 - ../dev
 
 images:
-- name: registry.access.redhat.com/ubi8/openjdk-17 # The original image name
-  newName: registry.access.redhat.com/ubi8/openjdk-17 # You can change the name
-  newTag: 1.12 # The new tag
+- name: registry.access.redhat.com/ubi8/openjdk-17
+  newName: registry.access.redhat.com/ubi8/openjdk-17
+  newTag: 1.12
