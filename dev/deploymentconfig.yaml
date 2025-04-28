@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-java-app
+  labels:
+    app: my-java-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-java-app
+  template:
+    metadata:
+      labels:
+        app: my-java-app
+    spec:
+      containers:
+      - name: my-java-app
+        # Important:  This is the image we will change with Kustomize
+        image: registry.access.redhat.com/ubi8/openjdk-17:1.11  
+        ports:
+        - containerPort: 8080
+        env:
+        - name: JAVA_OPTIONS
+          value: "-Xmx256m -Xms256m"
