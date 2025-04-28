@@ -8,4 +8,4 @@ resources:
 images:
 - name: registry.access.redhat.com/ubi8/openjdk-17
   newName: registry.access.redhat.com/ubi8/openjdk-17
-  newTag: 1.12
+  newTag: "1.12"
