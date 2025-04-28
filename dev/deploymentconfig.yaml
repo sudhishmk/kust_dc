@@ -1,25 +1,37 @@
-apiVersion: apps/v1
+apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
-  name: my-java-app
+  name: my-java-app-dc
+  namespace: test
   labels:
-    app: my-java-app
+    app: my-java-app-dc
 spec:
   replicas: 3
-  selector:
-    matchLabels:
-      app: my-java-app
   template:
     metadata:
       labels:
-        app: my-java-app
+        app: my-java-app-dc
     spec:
       containers:
       - name: my-java-app
-        # Important:  This is the image we will change with Kustomize
-        image: registry.access.redhat.com/ubi8/openjdk-17:1.11  
+        image: registry.access.redhat.com/ubi8/openjdk-17:1.11
         ports:
         - containerPort: 8080
         env:
         - name: JAVA_OPTIONS
           value: "-Xmx256m -Xms256m"
+  strategy:
+    type: Rolling
+    rollingParams:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  triggers:
+  - type: ConfigChange
+  - type: ImageChange
+    imageChangeParams:
+      automatic: true
+      containerNames:
+      - my-java-app
+      from:
+        kind: ImageStreamTag
+        name: openjdk-17:latest
