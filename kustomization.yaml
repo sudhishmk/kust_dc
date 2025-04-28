@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: test
+
+resources:
+- ../dev
+
+images:
+- name: registry.access.redhat.com/ubi8/openjdk-17 # The original image name
+  newName: registry.access.redhat.com/ubi8/openjdk-17 # You can change the name
+  newTag: 1.12 # The new tag
